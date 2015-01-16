@@ -16,10 +16,10 @@ elseif ("${CMAKE_Fortran_COMPILER_ID}" STREQUAL "NAG")
   set (CMAKE_Fortran_FLAGS "-kind=byte -ieee=full")
 endif()
 
-
+set(CMAKE_LIBRARY_PATH "/usr/lib64")
+message( STATUS "LIBPATH ${CMAKE_LIBRARY_PATH}")
 fortran_check_MPI()
 
-# add_library(zacros STATIC ${F90_SOURCES})
 
 include_directories(${MPI_Fortran_INCLUDE_PATH})
 
