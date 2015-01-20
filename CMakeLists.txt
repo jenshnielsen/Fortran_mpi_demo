@@ -20,25 +20,22 @@ set(CMAKE_LIBRARY_PATH "/usr/lib64")
 message( STATUS "LIBPATH ${CMAKE_LIBRARY_PATH}")
 fortran_check_MPI()
 
-
 include_directories(${MPI_Fortran_INCLUDE_PATH})
 
-add_executable(mpitest.x mpitest.f90)
-add_executable(mpitest_derived.x mpitest_derived.f90)
+set(targetstocompile mpitest mpitest_derived mpitest_send)
 
-if(MPI_Fortran_LIBRARIES)
-    set_target_properties(mpitest.x PROPERTIES
-        LINK_FLAGS "${MPI_Fortran_LINK_FLAGS}")
-    set_target_properties(mpitest_derived.x PROPERTIES
-        LINK_FLAGS "${MPI_Fortran_LINK_FLAGS}")
-endif()
+foreach(mytarget ${targetstocompile})
+    message( STATUS "Adding: ${mytarget}")
+    add_executable(${mytarget}.x ${mytarget}.f90)
 
-if(MPI_Fortran_COMPILE_FLAGS)
-    set_target_properties(mpitest.x PROPERTIES
-        COMPILE_FLAGS "${MPI_Fortran_COMPILE_FLAGS}")
-    set_target_properties(mpitest_derived.x PROPERTIES
-        COMPILE_FLAGS "${MPI_Fortran_COMPILE_FLAGS}")
-endif()
+    if(MPI_Fortran_LIBRARIES)
+        set_target_properties(${mytarget}.x PROPERTIES
+            LINK_FLAGS "${MPI_Fortran_LINK_FLAGS}")
+    endif()
+    if(MPI_Fortran_COMPILE_FLAGS)
+        set_target_properties(${mytarget}.x PROPERTIES
+            COMPILE_FLAGS "${MPI_Fortran_COMPILE_FLAGS}")
+    endif()
 
-target_link_libraries(mpitest.x ${MPI_Fortran_LIBRARIES})
-target_link_libraries(mpitest_derived.x ${MPI_Fortran_LIBRARIES})
+    target_link_libraries(${mytarget}.x ${MPI_Fortran_LIBRARIES})
+endforeach()
