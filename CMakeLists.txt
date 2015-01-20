@@ -24,17 +24,21 @@ fortran_check_MPI()
 include_directories(${MPI_Fortran_INCLUDE_PATH})
 
 add_executable(mpitest.x mpitest.f90)
+add_executable(mpitest_derived.x mpitest_derived.f90)
 
 if(MPI_Fortran_LIBRARIES)
-  set_target_properties(mpitest.x PROPERTIES
-    LINK_FLAGS "${MPI_Fortran_LINK_FLAGS}")
-  message( STATUS "Adding Cmake flags")
+    set_target_properties(mpitest.x PROPERTIES
+        LINK_FLAGS "${MPI_Fortran_LINK_FLAGS}")
+    set_target_properties(mpitest_derived.x PROPERTIES
+        LINK_FLAGS "${MPI_Fortran_LINK_FLAGS}")
 endif()
 
 if(MPI_Fortran_COMPILE_FLAGS)
-  set_target_properties(mpitest.x PROPERTIES
-    COMPILE_FLAGS "${MPI_Fortran_COMPILE_FLAGS}")
+    set_target_properties(mpitest.x PROPERTIES
+        COMPILE_FLAGS "${MPI_Fortran_COMPILE_FLAGS}")
+    set_target_properties(mpitest_derived.x PROPERTIES
+        COMPILE_FLAGS "${MPI_Fortran_COMPILE_FLAGS}")
 endif()
 
 target_link_libraries(mpitest.x ${MPI_Fortran_LIBRARIES})
-
+target_link_libraries(mpitest_derived.x ${MPI_Fortran_LIBRARIES})
