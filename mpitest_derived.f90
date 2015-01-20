@@ -32,6 +32,7 @@ program mpitest
     integer :: blockcounts(0:nfields-1)
 
     integer stat(MPI_STATUS_SIZE)
+    integer request
     integer mpicircletype
     integer :: subtypes(0:nfields-1)
 
@@ -60,7 +61,7 @@ program mpitest
     C = Circle(Point(0., 0.), rank+1)
     D = Circle(Point(0., 0.), 0.)
 
-
+    call MPI_IRECV(D, 1, mpicircletype, source, tag, MPI_COMM_WORLD, request, ierr)
 
     if (rank .eq. 0) then
         do i=0,size-1
@@ -68,7 +69,7 @@ program mpitest
         end do
     endif
 
-    call MPI_RECV(D, 1, mpicircletype, source, tag, MPI_COMM_WORLD, stat, ierr)
+    call MPI_Wait(request, stat, ierror)
 
     write(*,*) 'Hello World, I am ', rank, ' of ', size, 'and my circle is', C%Radius, &
         'wide centered at', C%Center%X, C%Center%Y, 'the other one is' ,  D%Radius, &
