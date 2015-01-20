@@ -36,9 +36,10 @@ program mpitest
     integer mpicircletype
     integer :: subtypes(0:nfields-1)
 
-    !type(MPI_Status) :: stat
-    !type(MPI_Datatype) :: mpicircletype
-    !type(MPI_Datatype) :: subtypes(0:nfields-1)
+!     type(MPI_Status) :: stat
+!     type(MPI_Request) :: request
+!     type(MPI_Datatype) :: mpicircletype
+!     type(MPI_Datatype) :: subtypes(0:nfields-1)
 
     tag = 0
     source = 0

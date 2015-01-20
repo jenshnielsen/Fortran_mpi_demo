@@ -1,7 +1,7 @@
 program mpitest
-
-    include 'mpif.h'
-    !use mpi_f08
+!    use mpi_f08
+    use mpi
+    implicit none
 
     integer :: rank, size, ierror
 

@@ -5,8 +5,12 @@ program mpitest
 
     integer :: rank, size, ierror
     integer :: i,C,D,tag,source
+
     integer stat(MPI_STATUS_SIZE)
     integer request
+
+!     type(MPI_Status) :: stat
+!     type(MPI_Request) :: request
 
     tag = 0
     source = 0
