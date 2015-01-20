@@ -1,7 +1,7 @@
 program mpitest
+    !use mpi_f08 !fortran 2008 interface
+    use mpi
     implicit none
-    include 'mpif.h'
-    !use mpi_f08
 
     integer :: rank, size, ierror
 
@@ -30,12 +30,13 @@ program mpitest
     integer(KIND=MPI_ADDRESS_KIND) :: lowerbound
     integer(KIND=MPI_ADDRESS_KIND) :: offset(0:nfields-1)
     integer :: blockcounts(0:nfields-1)
+
     integer stat(MPI_STATUS_SIZE)
-
     integer mpicircletype
-    !type(MPI_Datatype) :: mpicircletype
-
     integer :: subtypes(0:nfields-1)
+
+    !type(MPI_Status) :: stat
+    !type(MPI_Datatype) :: mpicircletype
     !type(MPI_Datatype) :: subtypes(0:nfields-1)
 
     tag = 0
