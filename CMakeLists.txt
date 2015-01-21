@@ -22,7 +22,7 @@ fortran_check_MPI()
 
 include_directories(${MPI_Fortran_INCLUDE_PATH})
 
-set(targetstocompile mpitest mpitest_derived mpitest_send)
+set(targetstocompile mpitest mpitest_derived mpitest_send mpitest_derived_alignment mpitest_pack)
 
 foreach(mytarget ${targetstocompile})
     message( STATUS "Adding: ${mytarget}")
